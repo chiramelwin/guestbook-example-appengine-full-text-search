@@ -29,7 +29,7 @@ public class GuestBookEntry {
         
         this.fts = new HashSet<String>();
         
-        SearchJanitor.updateFTSStuffForGreeting(this);
+        SearchJanitor.updateFTSStuffForGuestBookEntry(this);
     }
 
     public Long getId() {
