@@ -30,7 +30,7 @@ if (searchString != null) {
 	   PersistenceManager pm = PMF.get().getPersistenceManager();
 	   
 	
-		List<GuestBookEntry> searchResults = SearchJanitor.searchGreeting(searchString, pm);
+		List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(searchString, pm);
 	
 	
     if (searchResults.isEmpty()) {
@@ -52,6 +52,10 @@ if (searchString != null) {
 
 
 	<a href="guestbook.jsp">Back to main page</a>
+	
+	    <p>
+    Example project <a href="http://code.google.com/p/guestbook-example-appengine-full-text-search/">guestbook-example-appengine-full-text-search</a>.
+    </p>
 
   </body>
 </html>
