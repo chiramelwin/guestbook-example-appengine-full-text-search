@@ -62,15 +62,13 @@ This post showed you how to use self merge joins to index entities of the Google
 
 
 
+== Behind the scenes ==
+We are using this approach successfully in our scientific research project scisurfer.com. Ok. We added some secret "ranking" sauce :) But it works quite well for us.
 
+=== SCISURFER.COM ===
+The project: Science and scientific communication is changing at an ever increasing speed. It becomes more and more difficult for the individual researcher to follow the latest scientific trends. SCISURFER.COM develops solutions that allow for a comprehensive and up-to-date access to scientific information and trends. Our first application, the SCISURFER.COM reader allows for the scientist to access and surveil more than 10k scientific in one place.
 
-
-Nico Güttler, B.Sc.
-Studied Computational Biology at the Free University Berlin, graduating with a Bachelor of Science (B. Sc.). During college courses and a side job at the Charité University Medicine Center Berlin, he gained experience in different programming languages, web programming and algorithms.
-Besides SCISURFER he is pursuing the Master in Computational Biology.
-
-Dominic Jansen, M.Sc.
-
-
-Dr. Raphael Andre Bauer
-10 years of experience in industry and academia. Current project scisurfer.com, you can hire him for a talk or hands on introduction at xop3.com
+=== People ===
+ * Nico Güttler, Student
+ * Dominic Jansen, M.Sc.
+ * Raphael Bauer, PhD
