@@ -20,33 +20,40 @@ The whole project is availbale at google code: http://code.google.com/p/guestboo
 
 This should make it really simple to browse the source and checkout the project so you can try it yourself. Or check it out.
 
-=== The project - walkthrough ===
+=== The project - walkthrough indexing ===
  * *guestbook.jsp*: This file is the first file that is loaded. You can enter new entries into the guestbook (GuestBookEntry.java). But you can also search all guestbook entries using the upper form.
- * GuestBookEntry.java: A simple JDO file with persistent fields. However there is one special field: *fts*. It is a Set of Strings. They will be filled with the terms that allow for a full text search. If you inspect the constructer, you will see a call to 
+ * *GuestBookEntry.java*: A simple JDO file with persistent fields. However, there is one special field: *fts*. It is a Set of Strings. They will be filled with the terms that allow for a full text search. If you inspect the constructor, you will see a call to 
 {{{
 SearchJanitor.updateFTSStuffForGuestBookEntry(this);
 }}}
- * *SearchJanitor.java - method updateFTSStuffForGuestBookEntry*: 
+ * *SearchJanitor.java - method updateFTSStuffForGuestBookEntry*: This method gets a GuestBookEntry and chops it into single words using the SearchJanitorUtils method
+{{{
+SearchJanitorUtils.getTokensForIndexingOrQuery(...)
+}}}
+ * *SearchJanitorUtils.getTokensForIndexingOrQuery(...)*: This method uses Lucene and Lucene Snowball to extract words from the given String. But it does more: The Lucene Snowball stemmer reduces the words to the basic form what enables fuzzy search. A search for Kids or Kid will return the same results. kid and Kids will also return the same results.
 
 
-1) Checkout the project
-2) Basic layout:
-- guestbook.jsp
-- search.jsp
-- GuestBookEntry.java
+*Summary indexing*: Ok. So far we have an entity (GuestBookEntry.java) that will be filled with a set of Strings generated from it's content (SearchJanitor.updateFTSStuffForGuestBookEntry(...).
+Cool. But the "real" search is missing.
 
-3) Full text layout:
-SearchJanitor.java
-SearchJanitorUtils.java
+ 
+
+=== The project - walkthrough searching ===
+ * *search.jsp*: This file gets a parameter "search" and presents results for that search. It does that by consulting
+{{{
+List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(searchString, pm);
+}}}
+ * *SearchJanitor - method searchGuestBookEntries*: This method does all the "magic". It again chops the search string into single, stemmed words (using the SearchJanitorUtils) and constructs a query that searches for all these Strings in the field "fts" of entity GuestBookEntry. 
+
+*Summary*: We have a search.jsp that uses the same stemming as in the indexing part to translate a string into a searchable set of strings. This set of strings is then in turn queried against the datastore (in the form of slef merge joins on one field). Mission accomplished.
 
 
 
-Workflow:
 
-
-Stage 2:
-Inexact full text search:
-
+== Limitations of the approach ==
+ * 1MB limit on entities
+ * Number of terms to search for limited (max around 5 => but precise enough)
+ * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
 
 
 
@@ -59,10 +66,6 @@ Some thoughts about where to got from here:
  * Precompute date and timestamps to search for them. Don't search for ragens, but search for exact dates like 2009-10 (all entries in August 2009).
 
 
-== Limitations of the approach ==
- * 1MB limit on entities
- * Number of terms to search for limited (max around 5 => but precise enough)
- * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
 
 
 == Summary ==
