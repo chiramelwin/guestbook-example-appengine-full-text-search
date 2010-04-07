@@ -2,6 +2,16 @@
 == Abstract ==
 Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Bratt Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
 
+== About "us" ==
+This approach is successfully used in our GAE project http://scisurfer.com (scientific knowledge management). We added some secret ranking sauce - but in principle it works (and scales) really well for us. 
+
+Please feel free to contact us about this post or the project at any time (raphael.andre.bauer@gmail.com)
+
+Thanks!
+
+Nico Güttler, Dominic Jansen, Raphael Bauer
+
+
 === Goal ===
  * Develop a searchable guestbook example (much like the one shipped with the SDK) 
  * The full text search should be fuzzy within limits.
@@ -15,10 +25,9 @@ Many complain that Google App Engine is not able to do a full text search. Howev
 
 
 == The project ==
-=== Preparations ===
 The whole project is available at google code: http://code.google.com/p/guestbook-example-appengine-full-text-search
 
-This should make it really simple to browse the source and checkout the project so you can try it yourself. Or check it out.
+A live demo is available at http://guestbook-example-fts.appspot.com/
 
 === The project - walkthrough indexing ===
  * *guestbook.jsp*: This file is the first file that is loaded. You can enter new entries into the guestbook (!GuestBookEntry.java). But you can also search all guestbook entries using the upper form.
@@ -109,11 +118,3 @@ This post showed you how to use self merge joins to index entities of the Google
 
 
 
-
-= About "us" =
-This approach is successfully used in our GAE project http://scisurfer.com (scientific knowledge management). We added some raking "secret sauce" - but in principle it works (and scales) really well for us. 
-
-Please feel free to contact us about this post or the project at any time (raphael.andre.bauer@gmail.com)
-
-Thanks!
-Nico Güttler, Dominic Jansen, Raphael Bauer
