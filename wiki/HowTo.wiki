@@ -5,7 +5,7 @@ Many complain that Google App Engine is not able to do a full text search. Howev
 == About us ==
 This approach is successfully applied in our GAE project http://scisurfer.com (scientific knowledge management). We added some secret ranking sauce - but in principle it works (and scales) really well for us.
 
-Please feel free to contact us about this post or the project at any time (raphael.andre.bauer@gmail.com)
+Please feel free to contact us about this post or the project any time (raphael.andre.bauer@gmail.com).
 
 Thanks!
 
