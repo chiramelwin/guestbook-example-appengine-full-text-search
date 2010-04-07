@@ -40,17 +40,26 @@ Inexact full text search:
 
 
 
-Outlook:
-- add key only queries for more efficient searches
-- add memcache support for fast queries
-- add some secret sauce that enables you to "rank" results
-- precompute date and timestamps to search for them
 
 
-Limitations of the approach:
-- 1MB limit on entities
-- number of terms to search for limited (max around 5 => but precise enough)
-- if you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
+== Outlook ==
+Some thoughts about where to got from here:
+ * Add key only queries for more efficient searches
+ * Add memcache support for fast queries
+ * Add some secret sauce that enables you to "rank" results
+ * Precompute date and timestamps to search for them. Don't search for ragens, but search for exact dates like 2009-10 (all entries in August 2009).
+
+
+== Limitations of the approach ==
+ * 1MB limit on entities
+ * Number of terms to search for limited (max around 5 => but precise enough)
+ * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
+
+
+== Summary ==
+This post showed you how to use self merge joins to index entities of the Google App Engine and make them searchable. The approach has limitations, but it proves that the GAE can be made full text searchable.
+
+
 
 
 
