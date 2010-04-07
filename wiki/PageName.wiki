@@ -26,14 +26,14 @@ This should make it really simple to browse the source and checkout the project 
 {{{
 SearchJanitor.updateFTSStuffForGuestBookEntry(this);
 }}}
- * *!SearchJanitor.java - method updateFTSStuffForGuestBookEntry*: This method gets a GuestBookEntry and chops it into single words using the SearchJanitorUtils method
+ * *!SearchJanitor.java - method updateFTSStuffForGuestBookEntry*: This method gets a !GuestBookEntry and chops it into single words using the !SearchJanitorUtils method
 {{{
 SearchJanitorUtils.getTokensForIndexingOrQuery(...)
 }}}
  * *!SearchJanitorUtils.getTokensForIndexingOrQuery(...)*: This method uses Lucene and Lucene Snowball to extract words from the given String. But it does more: The Lucene Snowball stemmer reduces the words to the basic form what enables fuzzy search. A search for Kids or Kid will return the same results. kid and Kids will also return the same results.
 
 
-*Summary indexing*: Ok. So far we have an entity (GuestBookEntry.java) that will be filled with a set of Strings generated from it's content (SearchJanitor.updateFTSStuffForGuestBookEntry(...).
+*Summary indexing*: Ok. So far we have an entity (!GuestBookEntry.java) that will be filled with a set of Strings generated from it's content (!SearchJanitor.updateFTSStuffForGuestBookEntry(...).
 Cool. But the "real" search is missing.
 
  
@@ -43,7 +43,7 @@ Cool. But the "real" search is missing.
 {{{
 List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(searchString, pm);
 }}}
- * *!SearchJanitor - method searchGuestBookEntries*: This method does all the "magic". It again chops the search string into single, stemmed words (using the SearchJanitorUtils) and constructs a query that searches for all these Strings in the field "fts" of entity GuestBookEntry. 
+ * *!SearchJanitor - method searchGuestBookEntries*: This method does all the "magic". It again chops the search string into single, stemmed words (using the !SearchJanitorUtils) and constructs a query that searches for all these Strings in the field "fts" of entity !GuestBookEntry. 
 
 {{{
 	StringBuffer queryBuffer = new StringBuffer();
