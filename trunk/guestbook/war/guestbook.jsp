@@ -43,7 +43,7 @@
 
 
 <%
-	String query = "select from " + GuestBookEntry.class.getName() + " order by date desc range 0,5";
+	String query = "select from " + GuestBookEntry.class.getName() + " range 0,5";
     List<GuestBookEntry> guestBookEntries = (List<GuestBookEntry>) pm.newQuery(query).execute();
     if (guestBookEntries.isEmpty()) {
 %>
@@ -64,6 +64,10 @@
       <div><textarea name="entry" rows="3" cols="60"></textarea></div>
       <div><input type="submit" value="Post guestbook entry" /></div>
     </form>
+    
+    <p>
+    Example project <a href="http://code.google.com/p/guestbook-example-appengine-full-text-search/">guestbook-example-appengine-full-text-search</a>.
+    </p>
 
   </body>
 </html>

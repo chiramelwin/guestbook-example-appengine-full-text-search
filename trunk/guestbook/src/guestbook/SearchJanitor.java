@@ -19,7 +19,7 @@ public class SearchJanitor {
 	
 	public static final int MAX_NUMBER_OF_WORDS_TO_PUT_IN_INDEX = 200;
 	
-	public static List<GuestBookEntry> searchGuestBookEntry(
+	public static List<GuestBookEntry> searchGuestBookEntries(
 			String queryString, 
 			PersistenceManager pm) {
 
@@ -80,18 +80,18 @@ public class SearchJanitor {
 	
 	
 	public static void updateFTSStuffForGuestBookEntry(
-			GuestBookEntry greeting) {
+			GuestBookEntry guestBookEntry) {
 
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append(greeting.getContent());
+		sb.append(guestBookEntry.getContent());
 			
 		Set<String> new_ftsTokens = SearchJanitorUtils.getTokensForIndexingOrQuery(
 				sb.toString(),
 				MAX_NUMBER_OF_WORDS_TO_PUT_IN_INDEX);
 		
 		
-		Set<String> ftsTokens = greeting.getFts();
+		Set<String> ftsTokens = guestBookEntry.getFts();
 	
 			ftsTokens.clear();
 
