@@ -1,4 +1,4 @@
-= How to maka a Google App Engine application searchable using self merge joins =
+= How to make a Google App Engine application searchable using self merge joins =
 == Abstract ==
 Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Bratt Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
 
