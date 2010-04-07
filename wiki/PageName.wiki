@@ -7,14 +7,11 @@ Many complain that Google App Engine is not able to do a full text search. Howev
  * The full text search should be fuzzy within limits.
 
 == Some things before we start ==
- * *Full Text Search (FTS)*. Well. FTS is a really huge topic and can be done in a myriad of different ways. Check out wikipedia for a primer: http://en.wikipedia.org/wiki/Full_text_search
+ * *Self merge joins and list properties*: You can query an entity efficiently based on so called "list properties" via self merge joins. I will not talk about that in detail, but you should watch Brett's excellent talk at Google IO 09 about the topic. It will answer everything: Google I/O 2009 - Building Scalable, Complex Apps on App Engine http://www.youtube.com/watch?v=AgaL6NGpkB8
 
- * *Self merge joins and list properties*: You can query an entity efficiently based on so called "list properties" via self merge joins. I will not talk about that in detail, but you should watch Brett's excellent talk at Google IO 09 about the topic. It will answer everything: 
+ * *Full Text Search (FTS)*: Well. FTS is a really huge topic and can be done in a myriad of different ways. Check out wikipedia for a primer: http://en.wikipedia.org/wiki/Full_text_search
 
-Google I/O 2009 - Building Scalable, Complex Apps on App Engine 
-http://www.youtube.com/watch?v=AgaL6NGpkB8
-
-2) FTS. One of the most basic things to enable some kind of inexact search is so called "stemming". It's the reduction of words towards their basic form.
+ * *The art of stemming*: One of the most basic things to enable some kind of inexact search is so called "stemming". It's the reduction of words towards their basic form.
 http://en.wikipedia.org/wiki/Stemming
 http://snowball.tartarus.org/
 
@@ -70,4 +67,3 @@ Dominic Jansen, M.Sc.
 
 Dr. Raphael Andre Bauer
 10 years of experience in industry and academia. Current project scisurfer.com, you can hire him for a talk or hands on introduction at xop3.com
-
