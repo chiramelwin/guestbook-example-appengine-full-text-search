@@ -19,7 +19,7 @@ public class SearchJanitor {
 	
 	public static final int MAX_NUMBER_OF_WORDS_TO_PUT_IN_INDEX = 200;
 	
-	public static List<GuestBookEntry> searchGreeting(
+	public static List<GuestBookEntry> searchGuestBookEntry(
 			String queryString, 
 			PersistenceManager pm) {
 
@@ -79,7 +79,7 @@ public class SearchJanitor {
 	
 	
 	
-	public static void updateFTSStuffForGreeting(
+	public static void updateFTSStuffForGuestBookEntry(
 			GuestBookEntry greeting) {
 
 		StringBuffer sb = new StringBuffer();
