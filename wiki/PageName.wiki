@@ -1,0 +1,77 @@
+= Abstract =
+Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Bratt Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
+
+= Goal =
+- Develop a searchable guestbook example (much like the one shipped with the SDK)
+- The full text search should be fuzzy within limits.
+
+
+Some things before we start:
+http://en.wikipedia.org/wiki/Full_text_search
+
+1) You can query an entity efficiently based on so called "list properties" via self merge joins. I will not talk about that in detail, but you should watch Brett's excellent talk at Google IO 09 about the topic. It will answer everything: 
+
+Google I/O 2009 - Building Scalable, Complex Apps on App Engine 
+http://www.youtube.com/watch?v=AgaL6NGpkB8
+
+2) FTS. One of the most basic things to enable some kind of inexact search is so called "stemming". It's the reduction of words towards their basic form.
+http://en.wikipedia.org/wiki/Stemming
+http://snowball.tartarus.org/
+
+
+Preparations:
+The while project is availbale at google code: http://code.google.com/p/guestbook-example-appengine-full-text-search
+
+This should make it really simple to browse the source and checkout the project so you can try it yourself.
+
+
+1) Checkout the project
+2) Basic layout:
+- guestbook.jsp
+- search.jsp
+- GuestBookEntry.java
+
+3) Full text layout:
+SearchJanitor.java
+SearchJanitorUtils.java
+
+
+
+Workflow:
+
+
+Stage 2:
+Inexact full text search:
+
+
+
+Outlook:
+- add key only queries for more efficient searches
+- add memcache support for fast queries
+- add some secret sauce that enables you to "rank" results
+- precompute date and timestamps to search for them
+
+
+Limitations of the approach:
+- 1MB limit on entities
+- number of terms to search for limited (max around 5 => but precise enough)
+- if you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
+
+
+
+
+
+Nico Güttler, B.Sc.
+Studied Computational Biology at the Free University Berlin, graduating with a Bachelor of Science (B. Sc.). During college courses and a side job at the Charité University Medicine Center Berlin, he gained experience in different programming languages, web programming and algorithms.
+Besides SCISURFER he is pursuing the Master in Computational Biology.
+
+Dominic Jansen, M.Sc.
+
+
+Dr. Raphael Andre Bauer
+10 years of experience in industry and academia. Current project scisurfer.com, you can hire him for a talk or hands on introduction at xop3.com
+
+
+
+
+
