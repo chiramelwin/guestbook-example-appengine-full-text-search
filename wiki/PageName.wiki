@@ -21,7 +21,7 @@ The whole project is available at google code: http://code.google.com/p/guestboo
 This should make it really simple to browse the source and checkout the project so you can try it yourself. Or check it out.
 
 === The project - walkthrough indexing ===
- * *guestbook.jsp*: This file is the first file that is loaded. You can enter new entries into the guestbook (GuestBookEntry.java). But you can also search all guestbook entries using the upper form.
+ * *guestbook.jsp*: This file is the first file that is loaded. You can enter new entries into the guestbook (!GuestBookEntry.java). But you can also search all guestbook entries using the upper form.
  * *!GuestBookEntry.java*: A simple JDO file with persistent fields. However, there is one special field: *fts*. It is a Set of Strings. They will be filled with the terms that allow for a full text search. If you inspect the constructor, you will see a call to 
 {{{
 SearchJanitor.updateFTSStuffForGuestBookEntry(this);
