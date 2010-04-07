@@ -2,8 +2,8 @@
 Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Bratt Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
 
 = Goal =
-- Develop a searchable guestbook example (much like the one shipped with the SDK)
-- The full text search should be fuzzy within limits.
+ * Develop a searchable guestbook example (much like the one shipped with the SDK) 
+ * The full text search should be fuzzy within limits.
 
 
 Some things before we start:
@@ -70,8 +70,6 @@ Dominic Jansen, M.Sc.
 
 Dr. Raphael Andre Bauer
 10 years of experience in industry and academia. Current project scisurfer.com, you can hire him for a talk or hands on introduction at xop3.com
-
-
 
 
 
