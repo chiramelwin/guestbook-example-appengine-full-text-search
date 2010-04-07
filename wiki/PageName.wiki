@@ -1,4 +1,4 @@
-= How to maka a gae application searchable using self merge joins =
+= How to maka a Google App Engine application searchable using self merge joins =
 == Abstract ==
 Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Bratt Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
 
@@ -16,7 +16,7 @@ Many complain that Google App Engine is not able to do a full text search. Howev
 
 == The project ==
 === Preparations ===
-The whole project is availbale at google code: http://code.google.com/p/guestbook-example-appengine-full-text-search
+The whole project is available at google code: http://code.google.com/p/guestbook-example-appengine-full-text-search
 
 This should make it really simple to browse the source and checkout the project so you can try it yourself. Or check it out.
 
@@ -39,7 +39,7 @@ Cool. But the "real" search is missing.
  
 
 === The project - walkthrough searching ===
- * *search.jsp*: This file gets a parameter "search" and presents results for that search. It does that by consulting
+ * *!search.jsp*: This file gets a parameter "search" and presents results for that search. It does that by consulting
 {{{
 List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(searchString, pm);
 }}}
@@ -90,22 +90,18 @@ List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(search
 
 
 
-== Limitations of the approach ==
- * 1MB limit on entities
- * Number of terms to search for limited (max around 5 => but precise enough)
- * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results.
+=== Limitations of the approach ===
+ * 1MB limit on entities. You cannot store more than 1MB in one entity. You can of course work around this limitation by generating more than one entity. Or even a special kind of "FTSEntity".
+ * Number of terms to search for limited (max around 5 => but precise enough). You cannot search for a unlimited number of query terms as you are doing a (potentially costly) self merge join. But in 99.9% of the cases the results the user will get with a limited set of search terms will be fine.
+ * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results. That's up to you. If you do not have many entities you are querying this error will never show up. If you have thousands of entries you should make sure you are only getting subsets. Eg by only retrieving the "best" (secre sauce) results. Or only results from a particular day or so.
 
 
-
-
-== Outlook ==
-Some thoughts about where to got from here:
- * Add key only queries for more efficient searches
- * Add memcache support for fast queries
+=== Outlook ===
+Where to got from here:
+ * Add key only queries for more efficient searches http://gae-java-persistence.blogspot.com/2009/10/keys-only-queries.html
+ * Add memcache support for fast queries http://code.google.com/appengine/docs/java/memcache/overview.html
  * Add some secret sauce that enables you to "rank" results
  * Precompute date and timestamps to search for them. Don't search for ragens, but search for exact dates like 2009-10 (all entries in August 2009).
-
-
 
 
 == Summary ==
@@ -114,13 +110,10 @@ This post showed you how to use self merge joins to index entities of the Google
 
 
 
-== Behind the scenes ==
-We are using this approach successfully in our scientific research project scisurfer.com. Ok. We added some secret "ranking" sauce :) But it works quite well for us.
+= About "us" =
+This approach is successfully used in our GAE project http://scisurfer.com (scientific knowledge management). We added some raking "secret sauce" - but in principle it works (and scales) really well for us. 
 
-=== SCISURFER.COM ===
-The project: Science and scientific communication is changing at an ever increasing speed. It becomes more and more difficult for the individual researcher to follow the latest scientific trends. SCISURFER.COM develops solutions that allow for a comprehensive and up-to-date access to scientific information and trends. Our first application, the SCISURFER.COM reader allows for the scientist to access and surveil more than 10k scientific in one place.
+Please feel free to contact us about this post or the project at any time (raphael.andre.bauer@gmail.com)
 
-=== People ===
- * Nico Güttler, Student
- * Dominic Jansen, M.Sc.
- * Raphael Bauer, PhD
+Thanks!
+Nico Güttler, Dominic Jansen, Raphael Bauer
