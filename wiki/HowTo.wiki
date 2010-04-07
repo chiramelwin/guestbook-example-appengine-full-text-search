@@ -2,7 +2,7 @@
 == Abstract ==
 Many complain that Google App Engine is not able to do a full text search. However, using the presentation of Brett Slatkin at Google IO the implementation is pretty straight forward. The following article will give a practical introduction how to implement full text search on GAE. The code will be GAE/J + JDO only, but the concepts can be easily converted into Python or JPA.
 
-== About "us" ==
+== About us ==
 This approach is successfully used in our GAE project http://scisurfer.com (scientific knowledge management). We added some secret ranking sauce - but in principle it works (and scales) really well for us.
 
 Please feel free to contact us about this post or the project at any time (raphael.andre.bauer@gmail.com)
@@ -17,7 +17,7 @@ Nico Güttler, Dominic Jansen, Raphael Bauer
  * The full text search should be fuzzy within limits.
 
 === Some things before we start ===
- * *Self merge joins and list properties*: You can query an entity efficiently based on so called "list properties" via self merge joins. I will not talk about that in detail, but you should watch Brett's excellent talk at Google IO 09 about the topic. It will answer everything: Google I/O 2009 - Building Scalable, Complex Apps on App Engine http://www.youtube.com/watch?v=AgaL6NGpkB8
+ * *Self merge joins and list properties*: You can query an entity efficiently based on so called "list properties" via self merge joins. We will not talk about that in detail, but you should watch Brett's excellent talk at Google IO 09 about the topic. It will answer everything: Google I/O 2009 - Building Scalable, Complex Apps on App Engine http://www.youtube.com/watch?v=AgaL6NGpkB8
 
  * *Full Text Search (FTS)*: Well. FTS is a really huge topic and can be done in a myriad of different ways. Check out wikipedia for a primer: http://en.wikipedia.org/wiki/Full_text_search
 
@@ -35,6 +35,7 @@ A live demo is available at http://guestbook-example-fts.appspot.com/
 {{{
 SearchJanitor.updateFTSStuffForGuestBookEntry(this);
 }}}
+This call is responsible for making this GuestBookEntry searchable.
  * *!SearchJanitor.java - method updateFTSStuffForGuestBookEntry*: This method gets a !GuestBookEntry and chops it into single words using the !SearchJanitorUtils method
 {{{
 SearchJanitorUtils.getTokensForIndexingOrQuery(...)
@@ -102,11 +103,11 @@ List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(search
 === Limitations of the approach ===
  * 1MB limit on entities. You cannot store more than 1MB in one entity. You can of course work around this limitation by generating more than one entity. Or even a special kind of "FTSEntity".
  * Number of terms to search for limited (max around 5 => but precise enough). You cannot search for a unlimited number of query terms as you are doing a (potentially costly) self merge join. But in 99.9% of the cases the results the user will get with a limited set of search terms will be fine.
- * If you get too many results the search will not work. you have to make sure you are searching in a subset of the data with less than ~200 results. That's up to you. If you do not have many entities you are querying this error will never show up. If you have thousands of entries you should make sure you are only getting subsets. E.g. by only retrieving the "best" (secret sauce) results. Or only results from a particular day or so.
+ * If you get too many results this approach will not work. You have to make sure you are searching in a subset of the data with less than ~200 results. That's up to you. If you do not have many entities you are querying this error will never show up. If you have thousands of entries you should make sure you are only getting subsets. E.g. by only retrieving the "best" (secret sauce) results. Or only results from a particular day or so.
 
 
 === Outlook ===
-Where to got from here:
+Where to go from here:
  * Add key only queries for more efficient searches http://gae-java-persistence.blogspot.com/2009/10/keys-only-queries.html
  * Add memcache support for fast queries http://code.google.com/appengine/docs/java/memcache/overview.html
  * Add some secret sauce that enables you to "rank" results
@@ -115,5 +116,3 @@ Where to got from here:
 
 == Summary ==
 This post showed you how to use self merge joins to index entities of the Google App Engine and make them searchable. The approach has limitations, but it proves that the GAE can be made full text searchable.
-
-
