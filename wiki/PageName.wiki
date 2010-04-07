@@ -11,9 +11,7 @@ Many complain that Google App Engine is not able to do a full text search. Howev
 
  * *Full Text Search (FTS)*: Well. FTS is a really huge topic and can be done in a myriad of different ways. Check out wikipedia for a primer: http://en.wikipedia.org/wiki/Full_text_search
 
- * *The art of stemming*: One of the most basic things to enable some kind of inexact search is so called "stemming". It's the reduction of words towards their basic form.
-http://en.wikipedia.org/wiki/Stemming
-http://snowball.tartarus.org/
+ * *The art of stemming*: One of the most basic things to enable some kind of inexact search is so called "stemming". It's the reduction of words towards their basic form. http://en.wikipedia.org/wiki/Stemming
 
 
 Preparations:
