@@ -45,6 +45,46 @@ List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(search
 }}}
  * *SearchJanitor - method searchGuestBookEntries*: This method does all the "magic". It again chops the search string into single, stemmed words (using the SearchJanitorUtils) and constructs a query that searches for all these Strings in the field "fts" of entity GuestBookEntry. 
 
+{{{
+	StringBuffer queryBuffer = new StringBuffer();
+
+		queryBuffer.append("SELECT FROM " + GuestBookEntry.class.getName() + " WHERE ");
+
+		Set<String> queryTokens = SearchJanitorUtils
+				.getTokensForIndexingOrQuery(queryString,
+						MAXIMUM_NUMBER_OF_WORDS_TO_SEARCH);
+
+		List<String> parametersForSearch = new ArrayList<String>(queryTokens);
+
+		StringBuffer declareParametersBuffer = new StringBuffer();
+
+		int parameterCounter = 0;
+
+		while (parameterCounter < queryTokens.size()) {
+
+			queryBuffer.append("fts == param" + parameterCounter);
+			declareParametersBuffer.append("String param" + parameterCounter);
+
+			if (parameterCounter + 1 < queryTokens.size()) {
+				queryBuffer.append(" && ");
+				declareParametersBuffer.append(", ");
+
+			}
+
+			parameterCounter++;
+
+		}
+
+	
+		Query query = pm.newQuery(queryBuffer.toString());
+
+		query.declareParameters(declareParametersBuffer.toString());
+
+		List<GuestBookEntry> result = (List<GuestBookEntry>) query.executeWithArray(parametersForSearch
+				.toArray());
+	
+}}}
+
 *Summary*: We have a search.jsp that uses the same stemming as in the indexing part to translate a string into a searchable set of strings. This set of strings is then in turn queried against the datastore (in the form of slef merge joins on one field). Mission accomplished.
 
 
