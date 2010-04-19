@@ -109,6 +109,7 @@ List<GuestBookEntry> searchResults = SearchJanitor.searchGuestBookEntries(search
 
 === Outlook ===
 Where to go from here:
+ * Use reference entities to omit serialization costs (as outlined in Brett Slatkin's talk)
  * Add key only queries for more efficient searches http://gae-java-persistence.blogspot.com/2009/10/keys-only-queries.html
  * Add memcache support for fast queries http://code.google.com/appengine/docs/java/memcache/overview.html
  * Add some secret sauce that enables you to "rank" results
